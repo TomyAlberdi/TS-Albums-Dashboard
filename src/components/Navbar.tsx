@@ -46,7 +46,7 @@ const Navbar = () => {
         </DrawerContent>
       </Drawer>
       <div className="cursor-pointer hover:bg-zinc-800 ease-in duration-200">
-        <img src="/favicon.ico" alt="logo" className="w-[7vh] h-[7vh]" />
+        <img src="/favicon.ico" alt="logo" className="w-[8svh] h-[8svh]" />
       </div>
     </nav>
   );
