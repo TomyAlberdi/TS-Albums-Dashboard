@@ -8,19 +8,22 @@ import {
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
+import { useDataContext } from "@/Context/useDataContext";
 
 const Navbar = () => {
+  const { TimeConfig, updateTimeConfig } = useDataContext();
+
   return (
     <nav className="flex justify-between items-center shadow-lg bg-zinc-900">
       <Drawer>
         <DrawerTrigger asChild>
-          <Button className="ml-3 cursor-pointer" variant={"secondary"}>
-            <Menu />
-              Change Time Period
+          <Button className="ml-3">
+            <Menu color="black" />
+            Change Time Period
           </Button>
         </DrawerTrigger>
         <DrawerContent>
-          <div className="mx-auto w-full max-w-lg">
+          <div className="mx-auto w-full max-w-lg pb-8">
             <DrawerHeader>
               <DrawerTitle>Change Time Period</DrawerTitle>
               <DrawerDescription>
@@ -28,6 +31,17 @@ const Navbar = () => {
                 period.
               </DrawerDescription>
             </DrawerHeader>
+            <div className="flex flex-wrap gap-3 px-4 md:px-0">
+              {TimeConfig?.map((time, index) => (
+                <Button
+                  key={index}
+                  variant={time.active ? "destructive" : "default"}
+                  onClick={() => updateTimeConfig(time.value)}
+                >
+                  {time.name}
+                </Button>
+              ))}
+            </div>
           </div>
         </DrawerContent>
       </Drawer>
