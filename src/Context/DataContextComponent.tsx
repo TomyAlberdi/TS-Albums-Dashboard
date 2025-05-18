@@ -11,7 +11,7 @@ const DataContextComponent: React.FC<DataContextProviderProps> = ({
   children,
 }) => {
   const BASE_URL = "https://ws.audioscrobbler.com/2.0";
-  const API_KEY = "c360d63db0da100b508415c5bd8197fe";
+  const API_KEY = import.meta.env.VITE_API_KEY;
   const METHOD = "?method=user.gettopalbums&user=tomyalberdi";
 
   const [TimeConfig, setTimeConfig] = useState<Array<TimePeriod>>([
@@ -95,6 +95,7 @@ const DataContextComponent: React.FC<DataContextProviderProps> = ({
   useEffect(() => {
     const activeTime = TimeConfig.find((time) => time.active);
     fetchAlbums(activeTime!);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [TimeConfig]);
 
   const exportData: DataContextType = {
