@@ -14,10 +14,10 @@ const Navbar = () => {
   const { TimeConfig, updateTimeConfig } = useDataContext();
 
   return (
-    <nav className="flex justify-between items-center shadow-lg bg-zinc-900">
+    <nav className="flex justify-between items-center shadow-lg bg-zinc-900 h-[10%] px-2">
       <Drawer>
         <DrawerTrigger asChild>
-          <Button className="ml-3">
+          <Button>
             <Menu color="black" />
             Change Time Period
           </Button>
@@ -45,7 +45,7 @@ const Navbar = () => {
           </div>
         </DrawerContent>
       </Drawer>
-      <div className="p-3 cursor-pointer hover:bg-zinc-800 ease-in duration-200">
+      <div className="cursor-pointer hover:bg-zinc-800 ease-in duration-200">
         <img src="/favicon.ico" alt="logo" className="w-[7vh] h-[7vh]" />
       </div>
     </nav>
