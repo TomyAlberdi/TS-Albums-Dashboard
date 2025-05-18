@@ -21,17 +21,6 @@ export interface PartialAlbum {
   images: Image[];
 }
 
-export interface Pagination {
-  album: PartialAlbum[];
-  "@attr": {
-    user: string;
-    page: string;
-    perPage: string;
-    total: string;
-    totalPages: string;
-  };
-}
-
 export interface Tag {
   url: string;
   name: string;
@@ -70,7 +59,7 @@ export interface TimePeriod {
   active: boolean;
 }
 
-export interface returnData {
+export interface ReturnData {
   loading: boolean;
-  data: any;
+  data: PartialAlbum[] | CompleteAlbum | null;
 }

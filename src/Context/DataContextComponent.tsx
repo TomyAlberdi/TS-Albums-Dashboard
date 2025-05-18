@@ -1,6 +1,7 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { DataContext, type DataContextType } from "@/Context/DataContext";
-import type { TimePeriod } from "@/lib/DataInterfaces";
+import { type ReturnData, type TimePeriod } from "@/lib/DataInterfaces";
+import { toast } from "sonner";
 
 interface DataContextProviderProps {
   children: ReactNode;
@@ -10,7 +11,7 @@ const DataContextComponent: React.FC<DataContextProviderProps> = ({
   children,
 }) => {
   const BASE_URL = "https://ws.audioscrobbler.com/2.0";
-  const API_KEY = `api_key=${import.meta.env.VITE_API_KEY}`;
+  const API_KEY = "c360d63db0da100b508415c5bd8197fe";
   const METHOD = "?method=user.gettopalbums&user=tomyalberdi";
 
   const [TimeConfig, setTimeConfig] = useState<Array<TimePeriod>>([
@@ -59,9 +60,47 @@ const DataContextComponent: React.FC<DataContextProviderProps> = ({
     setTimeConfig(updatedTimeConfig);
   };
 
+  const [Albums, setAlbums] = useState<ReturnData>({
+    loading: true,
+    data: null,
+  });
+
+  const fetchAlbums = async (timePeriod: TimePeriod) => {
+    setAlbums({
+      loading: true,
+      data: null,
+    });
+    const url = `${BASE_URL}/${METHOD}&api_key=${API_KEY}&format=json&period=${timePeriod.value}&limit=48`;
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        toast.error("Something went wrong, please try again later.");
+        return;
+      }
+      const res = await response.json();
+      setAlbums({
+        loading: false,
+        data: res.topalbums.album,
+      });
+    } catch (error) {
+      toast.error("Something went wrong, please try again later.");
+      console.error(error);
+      setAlbums({
+        loading: false,
+        data: null,
+      });
+    }
+  };
+
+  useEffect(() => {
+    const activeTime = TimeConfig.find((time) => time.active);
+    fetchAlbums(activeTime!);
+  }, [TimeConfig]);
+
   const exportData: DataContextType = {
     TimeConfig,
     updateTimeConfig,
+    Albums,
   };
 
   return (
