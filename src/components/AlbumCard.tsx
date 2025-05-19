@@ -6,9 +6,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
-// <a href="https://www.flaticon.com/free-icons/medal" />
-// <a href="https://www.flaticon.com/free-icons/second-place" />
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface AlbumCardProps {
   album: PartialAlbum;
@@ -64,10 +67,22 @@ const AlbumCard = ({ album }: AlbumCardProps) => {
         }}
       />
       <CardHeader className="w-full h-full p-0">
-        <CardTitle className="truncate pt-2 leading-5">{album.name}</CardTitle>
-        <CardDescription className="truncate">
-          {album.artist.name}
-        </CardDescription>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <CardTitle className="truncate pt-2 leading-5">
+                {album.name}
+              </CardTitle>
+            </TooltipTrigger>
+            <CardDescription className="truncate">
+              {album.artist.name}
+            </CardDescription>
+            <TooltipContent>
+              <CardTitle className="text-lg text-zinc-900!">{album.name}</CardTitle>
+              <CardDescription className="text-zinc-900!">{album.artist.name}</CardDescription>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </CardHeader>
     </Card>
   );
