@@ -94,7 +94,7 @@ const AlbumCard = ({ album }: AlbumCardProps) => {
           </CardHeader>
         </Card>
       </DialogTrigger>
-      <DialogContent className="md:max-w-[50vw] md:w-[50vw] md:aspect-video p-0 w-[90vw]" aria-describedby={undefined}>
+      <DialogContent className="md:max-w-[50vw] md:w-[50vw] md:aspect-video p-0 w-[90vw] md:min-w-[750px] md:min-h-[500px]" aria-describedby={undefined}>
         <AlbumDetails albumName={album.name} artistName={album.artist.name} />
       </DialogContent>
     </Dialog>

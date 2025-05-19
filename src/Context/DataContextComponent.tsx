@@ -100,7 +100,9 @@ const DataContextComponent: React.FC<DataContextProviderProps> = ({
   }, [TimeConfig]);
 
   const getAlbumDetails = async (albumName: string, artistName: string) => {
-    const url = `${BASE_URL}/${METHOD_DETAILS}&api_key=${API_KEY}&artist=${artistName}&album=${albumName}&format=json`;
+    const url = `${BASE_URL}/${METHOD_DETAILS}&api_key=${API_KEY}&artist=${encodeURIComponent(
+      artistName
+    )}&album=${encodeURIComponent(albumName)}&format=json`;
     try {
       const response = await fetch(url);
       if (!response.ok) {

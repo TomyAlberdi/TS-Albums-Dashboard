@@ -45,7 +45,7 @@ const AlbumDetails = ({ albumName, artistName }: AlbumDetailsProps) => {
   if (Loading) return <Skeleton className="w-full md:h-full h-[90svh]" />;
 
   return (
-    <ScrollArea className="w-full md:h-full h-[90svh] ">
+    <ScrollArea className="w-full md:h-full h-[90svh] md:min-w-[750px] md:min-h-[500px]">
       <div className="w-full h-full flex md:flex-row flex-col p-6">
         <section className="md:w-2/3 w-full h-full">
           <div className="h-3/5 w-full flex md:flex-row flex-col">
@@ -97,7 +97,7 @@ const AlbumDetails = ({ albumName, artistName }: AlbumDetailsProps) => {
           </div>
         </section>
         <section className="md:h-full h-auto md:w-1/3 w-full bg-input rounded-md p-2 md:mt-0 mt-3">
-          {Album?.tracks.track ? (
+          {Album?.tracks?.track ? (
             <ol className="list-decimal list-inside ">
               {Array.isArray(Album?.tracks?.track) &&
                 Album.tracks?.track.map((track, index) => {
