@@ -41,16 +41,22 @@ export interface Track {
 }
 
 export interface CompleteAlbum {
-  images: Image[];
+  image: Image[];
   mbid: string;
   name: string;
   artist: string;
-    listeners: string;
+  listeners: string;
   playcount: string;
   url: string;
   tracks: {
-    track: Track[];
-  }
+    track: Track[] | Track;
+  };
+  wiki: {
+    published: string;
+  };
+  tags: {
+    tag: Tag[];
+  };
 }
 
 export interface TimePeriod {

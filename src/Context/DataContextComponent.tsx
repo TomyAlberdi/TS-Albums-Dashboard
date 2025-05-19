@@ -12,7 +12,8 @@ const DataContextComponent: React.FC<DataContextProviderProps> = ({
 }) => {
   const BASE_URL = "https://ws.audioscrobbler.com/2.0";
   const API_KEY = import.meta.env.VITE_API_KEY;
-  const METHOD = "?method=user.gettopalbums&user=tomyalberdi";
+  const METHOD_LIST = "?method=user.gettopalbums&user=tomyalberdi";
+  const METHOD_DETAILS = "?method=album.getinfo";
 
   const [TimeConfig, setTimeConfig] = useState<Array<TimePeriod>>([
     {
@@ -70,7 +71,7 @@ const DataContextComponent: React.FC<DataContextProviderProps> = ({
       loading: true,
       data: null,
     });
-    const url = `${BASE_URL}/${METHOD}&api_key=${API_KEY}&format=json&period=${timePeriod.value}&limit=48`;
+    const url = `${BASE_URL}/${METHOD_LIST}&api_key=${API_KEY}&format=json&period=${timePeriod.value}&limit=48`;
     try {
       const response = await fetch(url);
       if (!response.ok) {
@@ -98,10 +99,28 @@ const DataContextComponent: React.FC<DataContextProviderProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [TimeConfig]);
 
+  const getAlbumDetails = async (albumName: string, artistName: string) => {
+    const url = `${BASE_URL}/${METHOD_DETAILS}&api_key=${API_KEY}&artist=${artistName}&album=${albumName}&format=json`;
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        toast.error("Something went wrong, please try again later.");
+        return;
+      }
+      const res = await response.json();
+      return res.album;
+    } catch (error) {
+      toast.error("Something went wrong, please try again later.");
+      console.error(error);
+    }
+    return null;
+  };
+
   const exportData: DataContextType = {
     TimeConfig,
     updateTimeConfig,
     Albums,
+    getAlbumDetails,
   };
 
   return (
