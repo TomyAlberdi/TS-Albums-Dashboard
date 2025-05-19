@@ -4,7 +4,7 @@ import AlbumList from "@/components/AlbumList";
 
 function App() {
   return (
-    <div className="App md:h-screen h-[100svh] bg-secondary">
+    <div className="App md:min-h-screen min-h-[100svh] bg-input"> 
       <Navbar />
       <AlbumList />
       <Toaster />

@@ -14,7 +14,7 @@ const Navbar = () => {
   const { TimeConfig, updateTimeConfig } = useDataContext();
 
   return (
-    <nav className="flex justify-between items-center shadow-lg bg-zinc-900 h-[10%] px-2">
+    <nav className="flex justify-between items-center shadow-lg bg-zinc-900 h-[10svh] px-3 md:px-10">
       <Drawer>
         <DrawerTrigger asChild>
           <Button>

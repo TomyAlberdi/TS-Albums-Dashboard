@@ -18,7 +18,7 @@ export interface PartialAlbum {
   };
   name: string;
   artist: Artist;
-  images: Image[];
+  image: Image[];
 }
 
 export interface Tag {
