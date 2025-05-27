@@ -13,6 +13,10 @@ import { useDataContext } from "@/Context/useDataContext";
 const Navbar = () => {
   const { TimeConfig, updateTimeConfig } = useDataContext();
 
+  const navigateToPortfolio = () => {
+    window.open("https://www.tomas-alberdi.work/", "_blank");
+  };
+
   return (
     <nav className="flex justify-between items-center shadow-lg bg-zinc-900 h-[10svh] px-3 md:px-10">
       <Drawer>
@@ -45,7 +49,10 @@ const Navbar = () => {
           </div>
         </DrawerContent>
       </Drawer>
-      <div className="cursor-pointer hover:bg-zinc-800 ease-in duration-200">
+      <div
+        className="cursor-pointer hover:bg-zinc-800 ease-in duration-200"
+        onClick={navigateToPortfolio}
+      >
         <img src="/favicon.ico" alt="logo" className="w-[8svh] h-[8svh]" />
       </div>
     </nav>
